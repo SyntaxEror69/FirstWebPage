@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Modern Demo Website</title>
+
+<style>
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:Arial, sans-serif;
+}
+
+body{
+    background:#f5f5f5;
+}
+
+/* Navbar */
+.navbar{
+    position:fixed;
+    top:0;
+    width:100%;
+    background:#222;
+    color:white;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    padding:15px 40px;
+    z-index:1000;
+}
+
+.logo{
+    font-size:24px;
+    font-weight:bold;
+}
+
+.nav-links a{
+    color:white;
+    text-decoration:none;
+    margin-left:20px;
+    transition:.3s;
+}
+
+.nav-links a:hover{
+    color:#00d4ff;
+}
+
+/* Hero */
+.hero{
+    height:100vh;
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    align-items:center;
+    text-align:center;
+    background:linear-gradient(135deg,#00d4ff,#5b5bff);
+    color:white;
+}
+
+.hero h1{
+    font-size:55px;
+    animation:slideDown 1s ease;
+}
+
+.hero p{
+    margin:20px 0;
+    font-size:20px;
+}
+
+.btn{
+    padding:12px 25px;
+    border:none;
+    border-radius:30px;
+    cursor:pointer;
+    background:white;
+    color:#333;
+    font-size:16px;
+    transition:.3s;
+}
+
+.btn:hover{
+    transform:translateY(-4px);
+    box-shadow:0 8px 20px rgba(0,0,0,.2);
+}
+
+/* Cards */
+.section{
+    padding:80px 50px;
+}
+
+.cards{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+    gap:25px;
+}
+
+.card{
+    background:white;
+    padding:25px;
+    border-radius:15px;
+    text-align:center;
+    transition:.3s;
+}
+
+.card:hover{
+    transform:scale(1.05);
+    box-shadow:0 10px 25px rgba(0,0,0,.1);
+}
+
+/* Form */
+.contact-form{
+    max-width:500px;
+    margin:auto;
+}
+
+.contact-form input,
+.contact-form textarea{
+    width:100%;
+    padding:12px;
+    margin:10px 0;
+    border:1px solid #ccc;
+    border-radius:8px;
+}
+
+.contact-form button{
+    width:100%;
+}
+
+/* Footer */
+footer{
+    background:#222;
+    color:white;
+    text-align:center;
+    padding:20px;
+}
+
+@keyframes slideDown{
+    from{
+        opacity:0;
+        transform:translateY(-50px);
+    }
+    to{
+        opacity:1;
+        transform:translateY(0);
+    }
+}
+
+html{
+    scroll-behavior:smooth;
+}
+</style>
+</head>
+<body>
+
+<!-- Navbar -->
+<nav class="navbar">
+    <div class="logo">MySite</div>
+
+    <div class="nav-links">
+        <a href="#home">Home</a>
+        <a href="#services">Services</a>
+        <a href="#contact">Contact</a>
+    </div>
+</nav>
+
+<!-- Hero -->
+<section class="hero" id="home">
+    <h1>Welcome to My Website</h1>
+    <p>A modern webpage with basic UI elements.</p>
+    <button class="btn" onclick="showMessage()">Get Started</button>
+</section>
+
+<!-- Services -->
+<section class="section" id="services">
+    <h2 style="text-align:center;margin-bottom:30px;">Our Services</h2>
+
+    <div class="cards">
+        <div class="card">
+            <h3>Web Design</h3>
+            <p>Create beautiful websites.</p>
+        </div>
+
+        <div class="card">
+            <h3>Development</h3>
+            <p>Responsive and modern coding.</p>
+        </div>
+
+        <div class="card">
+            <h3>Support</h3>
+            <p>24/7 customer support.</p>
+        </div>
+    </div>
+</section>
+
+<!-- Contact -->
+<section class="section" id="contact">
+    <h2 style="text-align:center;margin-bottom:30px;">Contact Us</h2>
+
+    <form class="contact-form">
+        <input type="text" placeholder="Your Name">
+        <input type="email" placeholder="Your Email">
+        <textarea rows="5" placeholder="Message"></textarea>
+
+        <button type="button" class="btn" onclick="submitForm()">
+            Send Message
+        </button>
+    </form>
+</section>
+
+<footer>
+    © 2026 MySite | All Rights Reserved
+</footer>
+
+<script>
+function showMessage(){
+    alert("Welcome to the website!");
+}
+
+function submitForm(){
+    alert("Message Submitted Successfully!");
+}
+</script>
+
+</body>
+</html>
+<script>
+
+// Navbar background on scroll
+window.addEventListener("scroll", () => {
+    const navbar = document.querySelector(".navbar");
+
+    if(window.scrollY > 50){
+        navbar.style.background = "#111";
+        navbar.style.boxShadow = "0 4px 15px rgba(0,0,0,0.3)";
+    }
+    else{
+        navbar.style.background = "#222";
+        navbar.style.boxShadow = "none";
+    }
+});
+
+// Hero button
+function showMessage(){
+    const btn = document.querySelector(".btn");
+
+    btn.innerText = "Welcome!";
+    btn.disabled = true;
+
+    setTimeout(() => {
+        btn.innerText = "Get Started";
+        btn.disabled = false;
+    }, 2000);
+}
+
+// Contact form validation
+function submitForm(){
+
+    const name = document.querySelector('input[type="text"]');
+    const email = document.querySelector('input[type="email"]');
+    const message = document.querySelector('textarea');
+
+    if(
+        name.value.trim() === "" ||
+        email.value.trim() === "" ||
+        message.value.trim() === ""
+    ){
+        alert("Please fill all fields.");
+        return;
+    }
+
+    alert(
+        `Thank you ${name.value}!\n\nYour message has been received.`
+    );
+
+    name.value = "";
+    email.value = "";
+    message.value = "";
+}
+
+// Card animation when visible
+const observer = new IntersectionObserver(entries => {
+
+    entries.forEach(entry => {
+
+        if(entry.isIntersecting){
+
+            entry.target.style.opacity = "1";
+            entry.target.style.transform = "translateY(0)";
+        }
+    });
+
+}, { threshold: 0.2 });
+
+document.querySelectorAll(".card").forEach(card => {
+
+    card.style.opacity = "0";
+    card.style.transform = "translateY(40px)";
+    card.style.transition = "0.6s";
+
+    observer.observe(card);
+});
+
+// Dynamic year in footer
+document.querySelector("footer").innerHTML =
+`© ${new Date().getFullYear()} MySite | All Rights Reserved`;
+
+// Typing effect
+const text = "Welcome to My Website";
+const heading = document.querySelector(".hero h1");
+
+heading.innerHTML = "";
+
+let index = 0;
+
+function typeWriter(){
+
+    if(index < text.length){
+
+        heading.innerHTML += text.charAt(index);
+        index++;
+
+        setTimeout(typeWriter, 80);
+    }
+}
+
+typeWriter();
+
+</script>
